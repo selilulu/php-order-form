@@ -10,17 +10,22 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" type="text/css"
           rel="stylesheet"/>
     <title>Your fancy store</title>
+    <style>
+    .error {color: #FF0000;}
+
+    </style>
     
 </head>
 <body>
 <div class="container">
-    <h1>hopshop</h1>
+    <h1>Tiptop</h1>
     <h1>Place your order</h1>
-    <p>Your E-mail:<?php echo $email ?></p>
-    <p>Your Address:<?php echo $street . -$streetno ?>
+    <p><?php echo $email ?></p>
+    <p><?php echo $street ?> </p>
+    <p><?php echo $streetno ?></p>
+
     <p><?php echo $city ?></p>
     <p><?php echo $zipcode ?></p>
-    </p>
 
 
     <?php // Navigation for when you need it ?>
@@ -41,6 +46,8 @@
             <div class="form-group col-md-6">
                 <label for="email">E-mail:</label>
                 <input type="text" id="email" name="email" class="form-control"/>
+                <span class="error">* <?php echo $emailErr;?></span>
+                <br><br>
             </div>
             <div></div>
         </div>
@@ -75,9 +82,10 @@
             <?php foreach ($products as $i => $product): ?>
                 <label>
 					<?php // <?p= is equal to <?php echo ?>
+                    <!--mynote: in value of the input we had value="1" and to change that into the $i. 
+                    it prints us the index value so lets us to target it with $value at index.php -->
                     <input type="checkbox" value=<?php echo $i ?> name="products[<?php echo $i ?>]"/> 
-                    <?php echo $product['name'] ?> -
-                    &euro; <?= number_format($product['price'], 2) ?>
+                    <?php echo $product['name'] ?> - &euro; <?= number_format($product['price'], 2) ?>
                 </label><br />
             <?php endforeach; ?>
         </fieldset>
