@@ -1,4 +1,4 @@
-### php-order-form :laptop:
+### php-order-form :computer:
 
 Step 1: accepting orders
 Show an order confirmation when the user submits the form. This should contain the chosen products and delivery address).
