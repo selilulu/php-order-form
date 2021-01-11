@@ -53,13 +53,16 @@ $products = [
 
 // empty string variables can be assigned also next to each other like below too
 $productsErr= $emailErr = $streetErr = $streetnoErr =$emailErr = $cityErr = $zipcodeErr = "";
-// function test_input($data) {
-//     $data = trim($data);
-//     $data = stripslashes($data);
-//     $data = htmlspecialchars($data);
-//     return $data;
-//   }
-// this code above is for required areas and atm it works without it too 
+function test_input($data) {
+    $data = trim($data);//ltrim() - Removes whitespace or other predefined characters from the left side of a string
+
+    $data = stripslashes($data); //The stripcslashes() function removes \backslashes\ added by the addcslashes() function.
+
+
+    $data = htmlspecialchars($data);//htmlspecialchars converts the html code into more unreadable code (chars like &&^$$$@)
+    return $data;
+  }
+// this function above is for required areas and 
 
 
 $email=""; $street=""; $streetno=""; $city=""; $zipcode=""; $totalValue = 0;
@@ -103,7 +106,7 @@ if(isset($_POST['submit'])){
     $zipcode=$_POST['zipcode'];
     }
 
-    // here is the part for form validation 
+    // here is the part for form validation if required fields are empty or not
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($_POST["email"])) { //if the e mail area is empty then show the e mail is required error 
           $emailErr = "E-mail is required";
@@ -117,10 +120,10 @@ if(isset($_POST['submit'])){
           $street = test_input($_POST["street"]);
         }
       
-        if (empty($_POST["streetno"])) {
+        if (empty($_POST["streetnumber"])) {
           $streetnoErr = "street number is required";
         } else {
-          $streetno = test_input($_POST["streetno"]);
+          $streetno = test_input($_POST["streetnumber"]);
         }
       
         if (empty($_POST["city"])) {
@@ -128,6 +131,18 @@ if(isset($_POST['submit'])){
         } else {
           $city = test_input($_POST["city"]);
         }
+        // here it is to make zipcode only numeric
+        if ( ctype_digit($zipcode)) {  
+          
+          // if true then return Yes 
+          echo "Yes\n"; 
+      } else { 
+            
+          // if False then return No 
+          echo "No\n"; 
+      } 
+
+        // zipcode numeric part ends 
 
         if(empty($_POST["zipcode"])){
             $zipcodeErr ="zipcode is required";
@@ -142,9 +157,9 @@ if(isset($_POST['submit'])){
         // }
 
         }
-      
+      }
 
-    }
+    
 
 
 require 'form-view.php';
